@@ -1,0 +1,4 @@
+SECRET_KEY = "KevinTest"
+MONGODB_SETTINGS = {'DB': 'CPTester'}
+WTF_CSRF_ENABLED = False
+

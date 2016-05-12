@@ -2,6 +2,10 @@ from app import app
 from flask import render_template,request, jsonify
 from datetime import datetime
 from app.controller.controllerBrInterfaces import *
+from app.controller.controllerComInterfaces import *
+from app.controller.controllerContainerDNSMASQ import *
+from app.controller.controllerPhysicEthernetInterfaces import *
+from app.controller.controllerVlanInterfaces import *
 
 @app.route('/')
 def index():
@@ -25,9 +29,22 @@ def add():
     for(k,v) in jsondata.items():
         print type(k),"=",k, type(v)
         if (k == "brInterfaces"):
-            ctlbrintfs = ControllerBrInterfaces()
-            ctlbrintfs.initBridgeInterfaces(v)
-            ctlbrintfs.printBridgeInterfaces()
+            ctler = ControllerBrInterfaces(v,k)
+            ctler.printController()
+        elif (k == "comInterfaces"):
+            ctler = ControllerComInterfaces(v,k)
+            ctler.printController()
+        elif (k == "physicEthernetInterfaces"):
+            ctler = ControllerPhysicEthernetInterfaces(v,k)
+            ctler.printController()
+        elif (k == "vlanInterfaces"):
+            ctler = ControllerVlanInterfaces(v,k)
+            ctler.printController()
+        elif (k == "containerDNSMASQ"):
+            print "Container DNSMASQ is not supported"
+        else:
+            print "Not support type:",k
+
     return jsonify(status="success")
 
 
@@ -39,9 +56,6 @@ def delete(todo_id):
 @app.route('/update', methods=['POST',])
 def update():
     print "here"
-    ctlbrintf = ControllerBrInterfaces()
-    ctlbrintf.sayHello()
-#    print ctlbrintf
     return jsonify(status="success")
 
 @app.route('/list')

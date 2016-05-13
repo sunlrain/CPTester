@@ -29,21 +29,23 @@ def add():
     for(k,v) in jsondata.items():
         # print type(k),"=",k, type(v)
         if (k == "brInterfaces"):
-            ctler = ControllerBrInterfaces(v,k)
-            ctler.printController()
+            ctlbrintfs = ControllerBrInterfaces(v,k)
+            # ctlbrintfs.printController()
         elif (k == "comInterfaces"):
-            ctler = ControllerComInterfaces(v,k)
-            ctler.printController()
+            ctlcomintfs = ControllerComInterfaces(v,k)
+            # ctlcomintfs.printController()
         elif (k == "physicEthernetInterfaces"):
-            ctler = ControllerPhysicEthernetInterfaces(v,k)
-            ctler.printController()
+            ctlphyenetintfs = ControllerPhysicEthernetInterfaces(v,k)
+            # ctlphyenetintfs.printController()
         elif (k == "vlanInterfaces"):
-            ctler = ControllerVlanInterfaces(v,k)
-            ctler.printController()
+            ctlvlanintfs = ControllerVlanInterfaces(v,k)
+            # ctlvlanintfs.printController()
         elif (k == "containerDNSMASQ"):
             print "Container DNSMASQ is not supported"
         else:
             print "Not support type:",k
+
+        ctlphyenetintfs.executeController()
 
     return jsonify(status="success")
 

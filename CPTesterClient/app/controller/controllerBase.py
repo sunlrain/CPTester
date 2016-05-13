@@ -1,19 +1,15 @@
 # Definition of base controller
 from app.model.modelBase import *
-from app.model.modelTypes import *
+
 
 class controllerBase:
     def __init__(self, controllerData, controllerType):
-        print "controller Base Enter:", controllerType
-        # print type(controllerData)
-        # print type(controllerType)
+        # print "controller Base Enter:", controllerType
         self.controllermodellist = []
         for(k,v) in controllerData.items():
-            # print type(k),"=",k, type(v)
-            model = modelBase(v,modelTypes[controllerType])
-            # brintf.initModel(v)
+            model = modelBase(v,controllerType)
             self.controllermodellist.append(model)
-        print("controller Base End: "), controllerType
+        # print("controller Base End: "), controllerType
 
     def printController(self):
         print " "

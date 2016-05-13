@@ -27,7 +27,7 @@ def add():
     jsondata = request.json
     # print type(jsondata)
     for(k,v) in jsondata.items():
-        print type(k),"=",k, type(v)
+        # print type(k),"=",k, type(v)
         if (k == "brInterfaces"):
             ctler = ControllerBrInterfaces(v,k)
             ctler.printController()

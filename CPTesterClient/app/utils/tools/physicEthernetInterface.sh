@@ -14,24 +14,26 @@ MTU=$3
 IPADDR=$4
 NETMASK=$5
 
-#NULLSTRING="NULL"
+NULLSTRING="NULL"
 
 ## Check if the physic interface exists
-#ifconfig $IFNAME > /dev/null 2>&1
-#if [ $? -ne 0 ];
-#then
-#    echo "====Physical Ethernet Interface doesn't exist, please check!"
-#    exit
-#fi
+ifconfig $IFNAME > /dev/null 2>&1
+if [ $? -ne 0 ];
+then
+    echo "====Physical Ethernet Interface doesn't exist, please check!"
+    exit
+fi
 
-#print $IPADDR
-#print $NETMASK
-
-#if [ ${IPADDR}x = ${NULLSTRING}x ] || [ ${NETMASK}x = ${NULLSTRING}x ];
-#then
+#echo $IPADDR
+#echo $NETMASK
+#
+if [ ${IPADDR} = ${NULLSTRING} ] || [ ${NETMASK} = ${NULLSTRING} ];
+then
+#    echo "Print without IP Address"
     ifconfig $IFNAME hw ether $MACADDR mtu $MTU
-#else
-#    ifconfig $IFNAME hw ether $MACADDR mtu $MTU $IPADDR netmask $NETMASK
-#fi
+else
+#    echo "Print with IP Address"
+    ifconfig $IFNAME hw ether $MACADDR mtu $MTU $IPADDR netmask $NETMASK
+fi
 
 

@@ -19,19 +19,21 @@ class TestControllerBrInterfaces:
 #    def sayHello(self):
 #        print("Test Hello")
 
-ctlbrintfs = "null"
-ctlcomintfs = "null"
-ctlphyenetintfs = "null"
-ctlvlanintfs = "null"
+# ctlbrintfs = "null"
+# ctlcomintfs = "null"
+# ctlphyenetintfs = "null"
+# ctlvlanintfs = "null"
+
+global jsondata
 
 # add delete update list
 
 @app.route('/add', methods=['POST',])
 def add():
+    global jsondata
+
     jsondata = request.json
     # print type(jsondata)
-
-
 
     for(k,v) in jsondata.items():
         # print type(k),"=",k, type(v)
@@ -73,7 +75,9 @@ def update():
 def list():
     return jsonify(status="success")
 
-@app.route('/dump/packet')
+@app.route('/dump')
 def dump():
+    global jsondata
     # ctlvlanintfs.printController()
-    return jsonify(status="Dump success")
+    # print type(jsondata)
+    return jsonify(jsondata)

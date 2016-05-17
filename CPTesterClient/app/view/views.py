@@ -19,6 +19,10 @@ class TestControllerBrInterfaces:
 #    def sayHello(self):
 #        print("Test Hello")
 
+ctlbrintfs = "null"
+ctlcomintfs = "null"
+ctlphyenetintfs = "null"
+ctlvlanintfs = "null"
 
 # add delete update list
 
@@ -26,6 +30,9 @@ class TestControllerBrInterfaces:
 def add():
     jsondata = request.json
     # print type(jsondata)
+
+
+
     for(k,v) in jsondata.items():
         # print type(k),"=",k, type(v)
         if (k == "brInterfaces"):
@@ -39,15 +46,17 @@ def add():
             # ctlphyenetintfs.printController()
         elif (k == "vlanInterfaces"):
             ctlvlanintfs = ControllerVlanInterfaces(v,k)
-            # ctlvlanintfs.printController()
+            ctlvlanintfs.printController()
         elif (k == "containerDNSMASQ"):
             print "Container DNSMASQ is not supported"
         else:
             print "Not support type:",k
 
-        ctlphyenetintfs.executeController()
+    ctlphyenetintfs.executeController()
+    ctlvlanintfs.executeController()
 
     return jsonify(status="success")
+    # return jsonify(jsondata)
 
 
 @app.route('/delete/<string:todo_id>')
@@ -64,5 +73,7 @@ def update():
 def list():
     return jsonify(status="success")
 
-
-
+@app.route('/dump/packet')
+def dump():
+    # ctlvlanintfs.printController()
+    return jsonify(status="Dump success")

@@ -2,7 +2,7 @@
 
 # physicEthernetInterface.sh tap0 0019cb100001 1500 192.168.1.33 255.255.255.0
 
-if [ -z $1 ] || [ -z $2 ] || [ -z $3 ] ;
+if [ -z $1 ] || [ -z $2 ] || [ -z $3 ] || [ -z $4 ] || [ -z $5 ];
 then
     echo "Usage: physicEthernetInterface.sh tap0 0019cb100001 1500 192.168.1.33 255.255.255.0"
     exit
@@ -29,11 +29,11 @@ fi
 #
 if [ ${IPADDR} = ${NULLSTRING} ] || [ ${NETMASK} = ${NULLSTRING} ];
 then
-#    echo "Print without IP Address"
+    echo "ifconfig without IP Address: ifconfig $IFNAME hw ether $MACADDR mtu $MTU"
     ifconfig $IFNAME hw ether $MACADDR mtu $MTU
 else
-#    echo "Print with IP Address"
+    echo "ifconfig with IP Address: ifconfig $IFNAME hw ether $MACADDR mtu $MTU $IPADDR netmask $NETMASK"
     ifconfig $IFNAME hw ether $MACADDR mtu $MTU $IPADDR netmask $NETMASK
 fi
 
-
+ifconfig $IFNAME up
